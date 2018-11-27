@@ -5,17 +5,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
 const user = require("./routes/user");
-const server = app.listen(port);
-
-server.listen(port, () => {
-  console.log(`The server is running on port ${port}`);
-});
-
-server.on("connection", function(socket) {
-  console.log("A new connection was made by a client.");
-  socket.setTimeout(60 * 1000);
-  // 30 second timeout. Change this as you see fit.
-});
 
 // Morgan is a middleware that logs out in the console the request
 app.use(morgan("dev"));
@@ -57,3 +46,5 @@ app.use((error, req, res, next) => {
     }
   });
 });
+
+module.exports = app;
