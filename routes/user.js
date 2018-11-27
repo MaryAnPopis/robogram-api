@@ -6,18 +6,11 @@ const db = require("../conn");
  * Get all the users
  */
 router.get("/", (req, res) => {
-  db.connect(err => {
-    if (err) {
-      throw err;
-    }
-    console.log("Database connected..");
-  });
   let sql = "SELECT * from user";
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
   });
-  db.end();
 });
 
 /**
@@ -35,8 +28,8 @@ router.get("/:id", (req, res) => {
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
+    db.end();
   });
-  db.end();
 });
 
 /**
@@ -44,12 +37,6 @@ router.get("/:id", (req, res) => {
  * @param id user id to update
  */
 router.patch("/:id", (req, res) => {
-  db.connect(err => {
-    if (err) {
-      throw err;
-    }
-    console.log("Database connected..");
-  });
   const updateOps = req.body;
 
   let sql = `UPDATE user SET ? WHERE id = ${req.params.id}`;
@@ -57,7 +44,6 @@ router.patch("/:id", (req, res) => {
     if (err) throw err;
     res.send(result);
   });
-  db.end();
 });
 
 /**
@@ -65,18 +51,11 @@ router.patch("/:id", (req, res) => {
  * @param id user id to delete
  */
 router.delete("/:id", (req, res) => {
-  db.connect(err => {
-    if (err) {
-      throw err;
-    }
-    console.log("Database connected..");
-  });
   let sql = `DELETE FROM user WHERE id = ${req.params.id}`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
   });
-  db.end();
 });
 
 /**
@@ -105,8 +84,8 @@ router.post("/", (req, res) => {
   db.query(sql, user, (err, result) => {
     if (err) throw err;
     res.send(result);
+    db.end();
   });
-  db.end();
 });
 
 module.exports = router;

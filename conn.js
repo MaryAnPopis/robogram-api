@@ -5,7 +5,8 @@ const db = mysql.createConnection({
   host: "robogram.ckcm8ttzwplv.us-west-2.rds.amazonaws.com",
   user: "masteruser",
   password: "FvK9TKtqC2tqHHec",
-  database: "robogram"
+  database: "robogram",
+  port: 3306
 });
 
 module.exports = db;
