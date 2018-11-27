@@ -6,10 +6,17 @@ const db = require("../conn");
  * Get all the users
  */
 router.get("/", (req, res) => {
+  db.connect(err => {
+    if (err) {
+      throw err;
+    }
+    console.log("Database connected..");
+  });
   let sql = "SELECT * from user";
   db.query(sql, (err, results) => {
     if (err) throw err;
     else res.send(results);
+    db.end();
   });
 });
 
