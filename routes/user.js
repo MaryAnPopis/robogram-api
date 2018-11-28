@@ -7,9 +7,9 @@ const db = require("../conn");
  */
 router.get("/", (req, res) => {
   let sql = "SELECT * from user";
-  db.query(sql, (err, results) => {
+  db.query(sql, (err, rows, fields) => {
     if (!err) {
-      res.json(results);
+      res.json(rows);
     } else {
       console.log(err);
     }
