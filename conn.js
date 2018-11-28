@@ -6,7 +6,8 @@ const db = mysql.createConnection({
   user: "masteruser",
   password: "FvK9TKtqC2tqHHec",
   database: "robogram",
-  port: 3306
+  port: 3306,
+  connectTimeout: 30000
 });
 
 module.exports = db;
