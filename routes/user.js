@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
     if (!err) {
       res.json(rows);
     } else {
+      console.error(`GET ERROR ${err}`);
       throw err;
     }
   });
@@ -22,16 +23,13 @@ router.get("/", (req, res) => {
  */
 router.get("/:id", (req, res) => {
   let sql = `SELECT * from user where id = ${req.params.id}`;
-  // db.query(sql, (err, result) => {
-  //   if (err) throw err;
-  //   res.send(result);
-  // });
-  // For pool initialization, see above
-  db.getConnection(function(err, conn) {
-    // Do something with the connection
-    conn.query(sql);
-    // Don't forget to release the connection when finished!
-    pool.releaseConnection(conn);
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.err(`GET/:id error ${err}`);
+      throw err;
+    } else {
+      res.send(result);
+    }
   });
 });
 
