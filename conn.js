@@ -10,4 +10,13 @@ const db = mysql.createConnection({
   connectTimeout: 30000
 });
 
+db.connect(function(err) {
+  if (err) {
+    console.error(err);
+    return;
+  } else {
+    console.log("database is connected...");
+  }
+});
+
 module.exports = db;
