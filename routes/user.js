@@ -7,7 +7,7 @@ const db = require("../conn");
  */
 router.get("/", (req, res) => {
   let sql = "SELECT * from user";
-  db.query(sql, (err, results) => {
+  let query = db.query(sql, (err, results) => {
     if (err) throw err;
     else res.send(results);
   });
