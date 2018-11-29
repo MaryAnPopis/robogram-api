@@ -68,12 +68,6 @@ router.delete("/:id", (req, res) => {
  * @param avatar
  */
 router.post("/", (req, res) => {
-  db.connect(err => {
-    if (err) {
-      throw err;
-    }
-    console.log("Database connected..");
-  });
   let user = {
     fullname: req.body.fullname,
     username: req.body.username,
@@ -85,7 +79,6 @@ router.post("/", (req, res) => {
   db.query(sql, user, (err, result) => {
     if (err) throw err;
     res.send(result);
-    db.end();
   });
 });
 
