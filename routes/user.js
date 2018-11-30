@@ -76,9 +76,9 @@ router.post("/", (req, res) => {
     avatar: req.body.avatar
   };
   let sql = "INSERT INTO user SET ?";
-  db.query(sql, user, (err, result) => {
+  db.query(sql, user, (err, results) => {
     if (err) throw err;
-    res.send(result);
+    res.status(200).json({ insertId: results.insertId });
   });
 });
 
