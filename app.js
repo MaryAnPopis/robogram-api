@@ -3,14 +3,17 @@ const port = process.env.PORT || 5000;
 const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+require("dotenv").config();
 
+// require the routes
 const user = require("./routes/user");
+const post = require("./routes/post");
 
 // Morgan is a middleware that logs out in the console the request
 app.use(morgan("dev"));
 
 // Parse the json data or a urlencoded data
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Handling CORS erros, allowing any app to use the api
@@ -30,6 +33,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/users", user);
+app.use("/api/post", post);
 
 // Error handling
 app.use((req, res, next) => {
