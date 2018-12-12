@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 
 // Parse the json data or a urlencoded data
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'20mb'}));
 
 // Handling CORS erros, allowing any app to use the api
 app.use((req, res, next) => {
