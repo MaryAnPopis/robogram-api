@@ -13,8 +13,8 @@ const post = require("./routes/post");
 app.use(morgan("dev"));
 
 // Parse the json data or a urlencoded data
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ limit: "20mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
 
 // Handling CORS erros, allowing any app to use the api
 app.use((req, res, next) => {
