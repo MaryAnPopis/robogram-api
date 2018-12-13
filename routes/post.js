@@ -29,4 +29,16 @@ router.post("/image-upload", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  let sql = `SELECT * from post where userId = ${req.params.id}`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.err(`post GET/:id error ${err}`);
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 module.exports = router;
