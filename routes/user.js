@@ -82,4 +82,19 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/autho", (req, res) => {
+  let user = {
+    username: req.body.username,
+    password: req.body.password
+  };
+  let sql = `SELECT id FROM user WHERE
+  username= "${user.username}" AND password="${user.password}"`;
+  db.query(sql, user, (err, results) => {
+    if (err) throw err;
+    results[0] == null
+      ? res.status(404).json({ found: false, id: results })
+      : res.status(200).json({ found: true, id: results[0].id });
+  });
+});
+
 module.exports = router;
